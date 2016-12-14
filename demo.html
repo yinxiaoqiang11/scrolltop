@@ -1,0 +1,68 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>小火箭</title>
+	<style type="text/css">
+		*{
+			margin: 0;
+			padding: 0;
+		}
+		.btn{
+			width:26px;
+			height: 62px;
+			background: url(images/btn.png) 0 0 no-repeat;
+			position:fixed;
+			right: 100px;
+			bottom: 100px;
+			display: none;
+		}
+		.btn:hover{
+			background: url(images/btn.png) 0 -62px no-repeat;
+		}
+		.bg{
+			width: 1190px;
+			margin: 0 auto;
+		}
+	</style>
+</head>
+<body>
+	<a href="javascript:;" class="btn"></a>
+	<div class="bg">
+		<img src="images/bg.png" alt="">
+	</div>	
+<script type="text/javascript">
+	window.onload = function(){
+		var btn = document.querySelector(".btn");
+		var isTop = true;
+		var timer = null;
+		var iHeight = window.innerHeight;
+		window.onscroll = function(){
+			var top = document.body.scrollTop;
+			if(top >=iHeight){
+				btn.style.display = "block";
+			}else{
+				btn.style.display = "none"
+			}
+			if(!isTop){
+				clearInterval(timer);
+			}
+			isTop = false;
+		}
+		btn.onclick = function(){
+			clearInterval(timer);
+			timer = setInterval(fn,30);
+			function fn(){
+				var top = document.body.scrollTop;
+				var sudu = Math.ceil(top/8);
+				document.body.scrollTop = top - sudu;
+				isTop = true;
+				if(top == 0){
+					clearInterval(timer);
+				}
+  			}			
+		}	
+	}
+	</script>
+</body>
+</html>

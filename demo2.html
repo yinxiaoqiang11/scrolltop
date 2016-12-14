@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <style>
+        .box{
+            width:1190px;
+            margin:0 auto;
+        }
+        .btn{
+            width:32px;
+            height:62px;
+            position: fixed;
+            bottom: 100px;
+            right:100px;
+            background:url("images/btn.png") 0 0 no-repeat;
+            display: none;
+        }
+        .btn:hover{
+            background:url("images/btn.png") 0 -62px no-repeat;
+        }
+    </style>
+</head>
+<body>
+<script>
+    window.onload = function(){
+        var btn = document.querySelector(".btn");
+        var isTop = true;
+        var timer = null;
+        var iHeigth = window.innerHeight;
+        window.onscroll = function(){
+            var top = document.body.scrollTop;
+            if(top >= iHeigth){
+                btn.style.display = "block";
+            }else{
+                btn.style.display = "none";
+            }
+            if(!isTop){
+                clearInterval(timer);
+            }isTop = false;
+        }
+        btn.onclick = function(){
+            timer = setInterval(fn,30);
+            function fn(){
+                var top = document.body.scrollTop;
+                var sudu = Math.ceil(top/8);
+                document.body.scrollTop = top - sudu;
+                isTop = true;
+                if(top == 0){
+                    clearInterval(timer);
+                }
+            }
+        }
+    }
+</script>
+    <div class="box">
+        <img src="images/bg.png" alt="">
+    </div>
+    <a href="javascript:;" class="btn"></a>
+</body>
+</html>
